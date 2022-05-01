@@ -1,0 +1,73 @@
+.book {
+    width: 270px;
+    height: 425px;
+    display: flex;
+    flex-direction: column;
+    margin: 40px 15px;
+    border-radius: 10px;
+    background: rgb(237, 237, 239);
+
+    &__img {
+        flex: 0 0 auto;
+        margin: 0 auto;
+        width: 100%;
+        height: 300px;
+    }
+
+    &__info {
+        font-size: 14px;
+        flex: 1 0 auto;
+        height: 64px;
+        margin: 7px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
+
+    &__edit-mode {
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 1px 5px;
+
+            button {
+                padding: 3px;
+                border-radius: 5px;
+                background: green;
+                color: white;
+            }
+        }
+
+        input {
+            border-radius: 5px;
+            margin: 1px 0;
+            padding: 0 2px;
+        }
+    }
+
+    &__btn-group {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px;
+
+        .btn-group__favorite {
+            font-size: 30px;
+            cursor: pointer;
+
+            &.active {
+                color: orange;
+            }
+        }
+
+        .btn-group__delete-book {
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: red;
+            color: #ffffff;
+        }
+    }
+}

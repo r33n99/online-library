@@ -1,0 +1,19 @@
+@import url("./components/_header.scss");
+@import url("./components/_home-page.scss");
+@import url("./components/_categories.scss");
+@import url("./components/_book.scss");
+@import url("./components/_wish-list.scss");
+@import url("./components/_add-book.scss");
+@import url("./null.css");
+
+
+body {
+  font-family:'Times New Roman', Times, serif;
+}
+
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+

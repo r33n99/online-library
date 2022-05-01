@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    font-size: 1.2rem;
+    background-color: rgb(196, 157, 67);
+    color: #ffffff;
+
+    &__logo {
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo-img {
+        width: 50px;
+    }
+
+    &__logo-link {
+        color: #ffffff;
+        margin-left: 5px;
+    }
+
+    &__nav-panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        li {
+            margin-left: 7px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
+    &__nav-list {
+        color: #ffffff;
+
+        &.active {
+            border-bottom: 2px solid #ffffff;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+.wish-list {
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__no-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0 auto;
+        font-size: large;
+    }
+}

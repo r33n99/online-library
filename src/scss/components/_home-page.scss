@@ -1,0 +1,40 @@
+.home-page {
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+
+        @media screen and (max-width: 576px) {
+            justify-content: center;
+        }
+
+        @media screen and (max-width: 900px) {
+            justify-content: center;
+        }
+
+        .preloader {
+            display: flex;
+            margin: 0 auto;
+        }
+
+
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            background: green;
+            color: white;
+        }
+
+    }
+
+    &__info {
+        margin: 0 10px;
+        line-height: 15px;
+    }
+}
