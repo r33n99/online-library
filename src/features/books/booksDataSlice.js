@@ -22,24 +22,26 @@ export const bookSlice = createSlice({
   initialState,
 
   reducers: {
-    setFavoriteBookAction(state, action) {
+    setFavoriteBookAction(state, action) {  // добавление книги в избранное
       state.favorites = action.payload;
     },
     deleteBookAction(state, action) {
-      const newBooks = state.books.filter((item) => item.id !== action.payload);
+      const newBooks = state.books.filter((item) => item.id !== action.payload);  // проверяем на совпадение id книги
       state.books = newBooks
       localStorage.setItem("books", JSON.stringify(newBooks));
     },
     deleteFavoritesBookAction(state, action) {
-      const newFavorites = state.favorites.filter((item) => item !== action.payload);
+      const newFavorites = state.favorites.filter((item) => item !== action.payload); // проверка на совпадение идентификаторов
       state.favorites = newFavorites
       localStorage.setItem("favoritesBooks", JSON.stringify(newFavorites));
     },
-    addBookAction(state, action) {
-      state.books.push(action.payload);
-      localStorage.setItem("books", JSON.stringify(state.books));
+    addBookAction(state, action) {  // добавление книги
+      const {data,id} = action.payload;
+      const newBooks = [...state.books, {...data,id}];
+      state.books = newBooks
+      localStorage.setItem("books", JSON.stringify(state.books));   
     },
-    editBookAction(state, action) {
+    editBookAction(state, action) { 
       const newBooks = state.books.map((item) => {
         if (item.id === action.payload.id) {
           return action.payload;

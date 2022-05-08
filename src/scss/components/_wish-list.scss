@@ -12,6 +12,8 @@
         font-size: 1.2rem;
         font-weight: bold;
         margin: 0 auto;
-        font-size: large;
+        @media screen and (max-width: 576px) {
+            text-align: center;
+        }
     }
 }

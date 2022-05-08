@@ -18,30 +18,20 @@ export const Book = (props) => {
   const [editAuthorBook, setEditAuthorBook] = React.useState(author);
   const dispatch = useDispatch();
 
-  const getFavoriteBookId = (idFavBook) => {
+  const getFavoriteBookId = (idFavBook) => {  // получаем id избранной книги
     onSelectFavorite(idFavBook);
   };
 
-  const handleDeleteBook = (idBook) => {
+  const handleDeleteBook = (idBook) => {  // Удаление книги
     dispatch(deleteBookAction(idBook));
     dispatch(deleteFavoritesBookAction(idBook));
   };
 
-  const activeEditMode = () => {
+  const activeEditMode = () => {  // Активация режима редактирования
     setEditMode(true);
   };
 
-  const onNameChange = (e) => {
-    setEditNameBook(e.target.value);
-  };
-
-  const onGenreChange = (e) => {
-    setEditGenreBook(e.target.value);
-  };
-  const onAuthorChange = (e) => {
-    setEditAuthorBook(e.target.value);
-  };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { 
     dispatch(
       editBookAction({
         id: id,
@@ -64,21 +54,21 @@ export const Book = (props) => {
             <input
               type="text"
               placeholder="Название"
-              onChange={onNameChange}
+              onChange={(e)=> setEditNameBook(e.target.value)}
               value={editNameBook}
               name="name"
             />
             <input
               type="text"
               placeholder="Жанр"
-              onChange={onGenreChange}
+              onChange={(e)=> setEditGenreBook(e.target.value)}
               value={editGenreBook}
               name="genre"
             />
             <input
               type="text"
               placeholder="Автор"
-              onChange={onAuthorChange}
+              onChange={(e)=> setEditAuthorBook(e.target.value)}
               value={editAuthorBook}
               name="author"
             />
