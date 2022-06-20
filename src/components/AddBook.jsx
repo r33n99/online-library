@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addBookAction } from '../features/books/booksDataSlice';
 
-const AddBook = ({ setModalOpen }) => {
+export const AddBook = ({ setModalOpen }) => {
     const dispatch = useDispatch();
 
     const {
@@ -55,4 +55,3 @@ const AddBook = ({ setModalOpen }) => {
     );
 };
 
-export default AddBook;

@@ -4,7 +4,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteBookAction, editBookAction } from '../features/books/booksDataSlice';
 import { deleteFavoritesBookAction, selectFavorites } from '../features/favorites/favoritesSlise';
-import { useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export const Book = ({ name, genre, image, author, id, clickAddFavorite }) => {
     const { favorites } = useSelector(selectFavorites);
@@ -14,7 +14,6 @@ export const Book = ({ name, genre, image, author, id, clickAddFavorite }) => {
     const [editAuthorBook, setEditAuthorBook] = React.useState(author);
     const dispatch = useDispatch();
     const navigate = window.location.pathname === '/favorites'
-    
     const getFavoriteBookId = (idFavBook) => {
       navigate
             ? dispatch(deleteFavoritesBookAction(idFavBook))
@@ -48,7 +47,9 @@ export const Book = ({ name, genre, image, author, id, clickAddFavorite }) => {
 
     return (
         <div className="book">
+            <Link to={`book/${id}`}>
             <img className="book__img" src={image} alt={name} />
+            </Link>
             {editMode ? (
                 <div className="book__edit-mode">
                     <form autoFocus={true}>

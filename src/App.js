@@ -1,31 +1,26 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDataBooks } from './features/books/booksDataSlice';
-import { Header } from './components/Header';
+import React, { Suspense } from 'react';
 import { Home } from './pages/Home';
-import { WishList } from './pages/WishList';
-import { Routes, Route } from 'react-router-dom';
-import { selectSort } from './features/sort/sortSlice';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
 
 function App() {
-    const dispatch = useDispatch();
 
-    const { sort } = useSelector(selectSort);
-
-    React.useEffect(() => {
-        dispatch(getDataBooks(sort));
-    }, [dispatch, sort]);
-
+    const WishList = React.lazy(() => import(/* webpackChunkName: "WishList" */ './pages/WishList'));
+    const FullBook = React.lazy(() => import(/* webpackChunkName: "FullBook" */ './pages/FullBook'));
+    
     return (
-        <div className="wrapper">
-            <Header />
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-            </Routes>
-            <Routes>
-                <Route exact path="/favorites" element={<WishList />} />
-            </Routes>
-        </div>
+        <>
+            <Suspense fallback={<div>Идет загрузка...</div>}>
+                <Routes>
+                    <Route path="/" element={<MainLayout />}>
+                        <Route index element={<Home />} />
+                        <Route path="favorites" element={<WishList />} />
+                        <Route path="book/:id" element={<FullBook />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Route>
+                </Routes>
+            </Suspense>
+        </>
     );
 }
 

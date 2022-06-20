@@ -4,15 +4,20 @@
 @import url("./components/_book.scss");
 @import url("./components/_wish-list.scss");
 @import url("./components/_add-book.scss");
+@import url("./components/_fullbook.scss");
 @import url("./null.css");
 @import url('https://fonts.googleapis.com/css2?family=Philosopher:ital@1&display=swap');
 
 body {
   font-family: 'Philosopher', sans-serif;
 }
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
 
 .container {
-  margin: 60px auto;
+  margin: 80px auto;
   max-width: 1200px;
 }
 

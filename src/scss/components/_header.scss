@@ -1,10 +1,12 @@
 .header {
     display: flex;
     align-items: center;
+    width: 1200px;
     justify-content: space-around;
     height: 50px;
+
     font-size: 1.2rem;
-    background-color: rgb(196, 157, 67);
+    background-color: rgb(119, 81, 173);
     color: #ffffff;
 
     &__logo {
@@ -13,7 +15,7 @@
     }
 
     &__logo-img {
-        width: 50px;
+        width: 40px;
     }
 
     &__logo-link {
@@ -29,6 +31,7 @@
         li {
             margin-left: 12px;
 
+          
             &:first-child {
                 margin-left: 0;
             }
@@ -36,10 +39,29 @@
     }
 
     &__nav-list {
+        display: inline-block;
+        position: relative;
         color: #ffffff;
-
+        &::after{
+                position: absolute;
+                content: "";
+                width: 0;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                right: 0;
+                background: rgb(255, 255, 255);
+                transition: all 1s;
+        }
+        &:hover:after {
+            width: 100%;
+          }
         &.active {
             border-bottom: 2px solid #ffffff;
         }
     }
+}
+
+.header__container {
+    width: 100vw;
 }

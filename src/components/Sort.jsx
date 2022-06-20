@@ -8,7 +8,7 @@ const categoies = [
     { name: 'имени', sortProperty: 'name' },
 ];
 
-export const Sort = ({ value }) => {
+export const Sort = React.memo(({ value }) => {
     const sortRef = React.useRef(null);
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
@@ -68,4 +68,4 @@ export const Sort = ({ value }) => {
             )}
         </div>
     );
-};
+});

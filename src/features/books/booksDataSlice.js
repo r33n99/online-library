@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-    books: [],
+    books: JSON.parse(localStorage.getItem('books')) || [],
     loading: false,
     status: 'idle',
     selectedSort: null,
@@ -10,9 +10,9 @@ const initialState = {
 
 export const getDataBooks = createAsyncThunk('books/BooksData', async ({ sortProperty }) => {
     const queryParams = sortProperty ? `?sortBy=${sortProperty}` : '';
-    const response = await axios.get(`https://6149965f07549f001755a467.mockapi.io/books${queryParams}&order=asc`);
-    localStorage.setItem('books', JSON.stringify(response.data));
-    return response.data;
+    const { data } = await axios.get(`https://6149965f07549f001755a467.mockapi.io/books${queryParams}&order=asc`);
+    
+    return data;
 });
 
 export const bookSlice = createSlice({
@@ -30,7 +30,7 @@ export const bookSlice = createSlice({
             const { data, id } = action.payload;
             const newBooks = [...state.books, { ...data, id }];
             state.books = newBooks;
-            localStorage.setItem('books', JSON.stringify(state.books));
+            // localStorage.setItem('books', JSON.stringify(state.books));
         },
         editBookAction(state, action) {
             const newBooks = state.books.map((item) => {

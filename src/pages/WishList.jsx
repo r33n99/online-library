@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Book } from '../components/Book';
+import { Book } from '../components';
 import { selectBooks } from '../features/books/booksDataSlice';
 import { selectFavorites } from '../features/favorites/favoritesSlise';
 
-export const WishList = () => {
+const WishList = () => {
     const { favorites } = useSelector(selectFavorites);
     const { books } = useSelector(selectBooks);
     return (
@@ -28,3 +28,5 @@ export const WishList = () => {
         </div>
     );
 };
+
+export default WishList;
