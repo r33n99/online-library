@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { Search } from './Search';
 export const Header = () => {
     return (
         <div className="header header__container">
             <div className="header__logo">
                 <img className="header__logo-img" src="/img/logo_book.png" alt="#" />
                 <Link to="/" className="header__logo-link">
-                    Библиотека
+                   Онлайн библиотека
                 </Link>
             </div>
+            <Search />
             <nav>
                 <ul className="header__nav-panel">
                     <li>

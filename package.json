@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^14.1.1",
     "axios": "^0.27.1",
+    "lodash.debounce": "^4.0.8",
     "node-sass": "^7.0.1",
     "react": "^18.0.0",
     "react-content-loader": "^6.2.0",

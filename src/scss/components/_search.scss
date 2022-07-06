@@ -1,0 +1,23 @@
+.search {
+    width: 300px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 4px 7px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 15px;
+    background: #FFFFFF;
+
+    input {
+        border: none;
+    }
+
+    &__icon {
+        position: absolute;
+        margin-right: 5px;
+        width: 12px;
+        cursor: pointer;
+        right: 8px;
+    }
+}

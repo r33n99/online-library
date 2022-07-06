@@ -4,20 +4,26 @@ import StarIcon from '@mui/icons-material/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteBookAction, editBookAction } from '../features/books/booksDataSlice';
 import { deleteFavoritesBookAction, selectFavorites } from '../features/favorites/favoritesSlise';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import noImage from "../assets/images/no-image.jpg";
+export const Book = ({ id, clickAddFavorite, volumeInfo }) => {
+    const author = volumeInfo.authors?.join('');
+    const image = volumeInfo.imageLinks?.thumbnail;
+    const genre = volumeInfo.categories;
+    const title = volumeInfo.title;
 
-export const Book = ({ name, genre, image, author, id, clickAddFavorite }) => {
     const { favorites } = useSelector(selectFavorites);
+
     const [editMode, setEditMode] = React.useState(false);
-    const [editNameBook, setEditNameBook] = React.useState(name);
+    const [editNameBook, setEditNameBook] = React.useState(title);
     const [editGenreBook, setEditGenreBook] = React.useState(genre);
     const [editAuthorBook, setEditAuthorBook] = React.useState(author);
+
     const dispatch = useDispatch();
-    const navigate = window.location.pathname === '/favorites'
+    const navigate = window.location.pathname === '/favorites';
+
     const getFavoriteBookId = (idFavBook) => {
-      navigate
-            ? dispatch(deleteFavoritesBookAction(idFavBook))
-            : clickAddFavorite(idFavBook);
+        navigate ? dispatch(deleteFavoritesBookAction(idFavBook)) : clickAddFavorite(idFavBook);
     };
 
     const handleDeleteBook = (idBook) => {
@@ -47,9 +53,16 @@ export const Book = ({ name, genre, image, author, id, clickAddFavorite }) => {
 
     return (
         <div className="book">
-            <Link to={`book/${id}`}>
-            <img className="book__img" src={image} alt={name} />
-            </Link>
+            <div className="book__img">
+                 <img src={image ? image : noImage} alt={title} />
+                 <div onClick={() => getFavoriteBookId(id)}>
+                    {favorites.includes(id) ? (
+                        <StarIcon className="btn-group__favorite active" />
+                    ) : (
+                        <StarBorderIcon className="btn-group__favorite" />
+                    )}
+                </div>
+            </div>
             {editMode ? (
                 <div className="book__edit-mode">
                     <form autoFocus={true}>
@@ -82,30 +95,28 @@ export const Book = ({ name, genre, image, author, id, clickAddFavorite }) => {
             ) : (
                 <div className="book__info">
                     <h3 onDoubleClick={activeEditMode} className="book__title">
-                        <strong>Название:</strong> {name}
+                        <strong>Название:</strong> {title}
                     </h3>
-                    <p className="book__category">
-                        <strong>Жанр:</strong> {genre}
-                    </p>
-                    <p className="book__author">
-                        <strong>Автор:</strong> {author}
-                    </p>
-                </div>
-            )}
-            <div className="book__btn-group">
-                <div onClick={() => getFavoriteBookId(id)}>
-                    {favorites.includes(id) ? (
-                        <StarIcon className="btn-group__favorite active" />
-                    ) : (
-                        <StarBorderIcon className="btn-group__favorite" />
+                    {genre && (
+                        <p className="book__category">
+                            <strong>Жанр:</strong> {genre}
+                        </p>
                     )}
-                </div>
+                    {author && (
+                          <p className="book__author">
+                          <strong>Автор:</strong> {author}
+                      </p>
+                    )}
+                     <div className="book__btn-group">
                 {navigate ? null : (
-                    <button className="btn-group__delete-book" onClick={() => handleDeleteBook(id)}>
-                        Удалить
-                    </button>
+                    <Link to={`book/${id}`}>
+                        <div className="btn-group__info">Подробнее</div>
+                    </Link>
                 )}
             </div>
+                </div>
+            )}
+           
         </div>
     );
 };

@@ -2,17 +2,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-    books: JSON.parse(localStorage.getItem('books')) || [],
+    books:  [],
     loading: false,
     status: 'idle',
     selectedSort: null,
+    searchTerm: 'frontend',
 };
 
-export const getDataBooks = createAsyncThunk('books/BooksData', async ({ sortProperty }) => {
-    const queryParams = sortProperty ? `?sortBy=${sortProperty}` : '';
-    const { data } = await axios.get(`https://6149965f07549f001755a467.mockapi.io/books${queryParams}&order=asc`);
-    
-    return data;
+export const getDataBooks = createAsyncThunk('books/BooksData', async (query) => {
+    // const sort = sortProperty ? `&orderBy=${sortProperty}` : '';
+    const { data: {items} } = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+    return items;
 });
 
 export const bookSlice = createSlice({
@@ -23,7 +23,7 @@ export const bookSlice = createSlice({
         deleteBookAction(state, action) {
             const newBooks = state.books.filter((item) => item.id !== action.payload); // проверяем на совпадение id книги
             state.books = newBooks;
-            localStorage.setItem('books', JSON.stringify(newBooks));
+            // localStorage.setItem('books', JSON.stringify(newBooks));
         },
         addBookAction(state, action) {
             // добавление книги
@@ -40,8 +40,11 @@ export const bookSlice = createSlice({
                 return item;
             });
             state.books = newBooks;
-            localStorage.setItem('books', JSON.stringify(newBooks));
+            // localStorage.setItem('books', JSON.stringify(newBooks));
         },
+        setSearchTermAction(state, action) {
+            state.searchTerm = action.payload;
+        }
     },
 
     extraReducers: {
@@ -60,6 +63,6 @@ export const bookSlice = createSlice({
 
 export const selectBooks = (state) => state.books;
 
-export const { deleteBookAction, addBookAction, editBookAction } = bookSlice.actions;
+export const { deleteBookAction, addBookAction, editBookAction,setSearchTermAction } = bookSlice.actions;
 
 export default bookSlice.reducer;

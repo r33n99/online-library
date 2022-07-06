@@ -7,14 +7,24 @@ const FullBook = () => {
     const [loading, setLoading] = React.useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
+    console.log(book);
+    const { volumeInfo } = book;
 
-    const { name, author, image } = book;
-
+    const author = volumeInfo?.authors?.join('');
+    const image = volumeInfo?.imageLinks?.thumbnail;
+    const description = volumeInfo?.description;
+    const title = volumeInfo?.title;
+    const toBuy = volumeInfo?.infoLink;
+    const categories = volumeInfo?.categories?.join('');
+    const publisher = volumeInfo?.publisher;
+    const publishedDate = volumeInfo?.publishedDate;
+    const pageCount = volumeInfo?.pageCount;
+    // console.log(title)
     React.useEffect(() => {
         const getBook = async () => {
             setLoading(true);
             try {
-                const { data } = await axios.get(`https://6149965f07549f001755a467.mockapi.io/books/${id}`);
+                const { data } = await axios.get(`https://www.googleapis.com/books/v1/volumes/${id}`);
                 setBook(data);
                 setLoading(false);
             } catch (error) {
@@ -36,17 +46,42 @@ const FullBook = () => {
             ) : (
                 <>
                     <div className="fullBook__content">
-                        <img src={image} alt={name} className="fullBook__image" />
                         <div className="fullBook__info">
+                            <img src={image} alt={title} className="fullBook__image" />
                             <h1 className="fullBook__title text">
-                                <strong>Название:</strong> {name}
+                                <strong>Название:</strong> {title}
                             </h1>
+                            {categories && (
+                                <h2>
+                                    <strong>Жанр:</strong> {categories}
+                                </h2>
+                            )}
                             <p className="fullBook__author text">
                                 <strong>Автор:</strong> {author}
                             </p>
-                            <p className="fullBook__description text"><strong>Описание:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus doloremque ullam cumque autem nesciunt nihil id veritatis dolores pariatur asperiores error qui, unde aliquam minus porro quibusdam voluptatibus at eius. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ut nihil, veritatis fugiat quae modi provident architecto omnis exercitationem sint debitis eveniet a pariatur laborum vel. Ut itaque voluptas dolores</p>
-                            <div className="fullBook__button"  onClick={comeBack}>
-                                Назад
+                            <p>
+                                <strong>Издатель:</strong> {publisher}
+                            </p>
+                            {publishedDate && (
+                                <p>
+                                    <strong>Дата издания:</strong> {publishedDate}
+                                </p>
+                            )}
+                            <p>
+                                <strong>кол-во страниц:</strong> {pageCount}
+                            </p>
+                            {description && (
+                                <p className="fullBook__description text">
+                                    <strong>Описание:</strong> {description}
+                                </p>
+                            )}
+                            <div className="fullBook__btn-group">
+                                <a href={toBuy} alt={title} rel="noreferrer" target="_blank">
+                                    Купить
+                                </a>
+                                <button className="fullBook__button" onClick={comeBack}>
+                                    Назад
+                                </button>
                             </div>
                         </div>
                     </div>

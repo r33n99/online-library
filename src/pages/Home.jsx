@@ -1,25 +1,26 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Skeleton, Sort, Book, AddBook } from '../components';
+import { Skeleton, Book, AddBook } from '../components';
+import { Search } from '../components/Search';
 import { getDataBooks, selectBooks } from '../features/books/booksDataSlice';
 import { selectFavorites, setFavoriteBookAction } from '../features/favorites/favoritesSlise';
-import { selectSort } from '../features/sort/sortSlice';
 
 export const Home = () => {
-    const { books, loading } = useSelector(selectBooks);
-    const { sort } = useSelector(selectSort);
+    const { books, loading,searchTerm } = useSelector(selectBooks);
     const { favorites } = useSelector(selectFavorites);
-
     const dispatch = useDispatch();
 
     const [modalOpen, setModalOpen] = React.useState(false);
     const [selectFavoriteBook, setSelectFavoriteBook] = React.useState(favorites);
+
     const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
 
     const isMounted = React.useRef(false);
+
+    // console.log(searchValue)
     React.useEffect(() => {
-        dispatch(getDataBooks(sort));
-    }, [dispatch, sort]);
+        dispatch(getDataBooks(searchTerm));
+    }, [dispatch, searchTerm]);
 
     React.useEffect(() => {
         if (isMounted.current) {
@@ -40,14 +41,12 @@ export const Home = () => {
     return (
         <div className="home-page container">
             <div className="home-page__header">
-                <button onClick={() => setModalOpen(!modalOpen)}>Добавить книгу</button>
-                <Sort value={sort} />
             </div>
             <div ref={isMounted} className="home-page__content">
                 {loading
                     ? skeletons
-                    : books.map((book, index) => (
-                          <Book clickAddFavorite={clickAddFavorite} key={`${book.id}_${index}`} {...book} />
+                    : books?.map((book) => (
+                          <Book clickAddFavorite={clickAddFavorite} key={book.id} {...book} />
                       ))}
             </div>
             {modalOpen ? <AddBook setModalOpen={setModalOpen} /> : null}

@@ -2,6 +2,7 @@
     &__content {
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
 
         @media screen and (max-width: 576px) {
             justify-content: center;

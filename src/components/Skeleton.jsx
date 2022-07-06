@@ -2,20 +2,18 @@ import React from "react"
 import ContentLoader from "react-content-loader"
 
 export const Skeleton = (props) => (
- <ContentLoader
+<ContentLoader 
     speed={2}
-    width={300}
+    width={400}
     height={460}
-    viewBox="0 0 300 460"
-    backgroundColor="#eee8e8"
-    foregroundColor="#c7c2c2"
+    viewBox="0 0 400 460"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
     {...props}
   >
-    <rect x="23" y="27" rx="2" ry="2" width="266" height="304" /> 
-    <rect x="23" y="342" rx="0" ry="0" width="266" height="11" /> 
-    <rect x="212" y="402" rx="28" ry="28" width="79" height="43" /> 
-    <rect x="23" y="411" rx="0" ry="0" width="85" height="33" /> 
-    <rect x="23" y="362" rx="0" ry="0" width="266" height="11" /> 
-    <rect x="23" y="382" rx="0" ry="0" width="266" height="11" />
+    <rect x="0" y="60" rx="2" ry="2" width="148" height="148" /> 
+    <rect x="158" y="101" rx="0" ry="0" width="266" height="12" /> 
+    <rect x="158" y="126" rx="0" ry="0" width="266" height="12" /> 
+    <rect x="158" y="163" rx="0" ry="0" width="82" height="34" />
   </ContentLoader>
 )
