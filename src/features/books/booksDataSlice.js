@@ -2,15 +2,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-    books:  [],
+    books: localStorage.getItem("books") ? JSON.parse(localStorage.getItem("books")) : [],
     loading: false,
     status: 'idle',
     selectedSort: null,
-    searchTerm: 'frontend',
+    searchTerm: 'books',
 };
 
 export const getDataBooks = createAsyncThunk('books/BooksData', async (query) => {
-    // const sort = sortProperty ? `&orderBy=${sortProperty}` : '';
     const { data: {items} } = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
     return items;
 });
@@ -18,12 +17,11 @@ export const getDataBooks = createAsyncThunk('books/BooksData', async (query) =>
 export const bookSlice = createSlice({
     name: 'book',
     initialState,
-
     reducers: {
         deleteBookAction(state, action) {
             const newBooks = state.books.filter((item) => item.id !== action.payload); // проверяем на совпадение id книги
             state.books = newBooks;
-            // localStorage.setItem('books', JSON.stringify(newBooks));
+            localStorage.setItem('books', JSON.stringify(newBooks));
         },
         addBookAction(state, action) {
             // добавление книги

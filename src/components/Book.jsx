@@ -11,6 +11,7 @@ export const Book = ({ id, clickAddFavorite, volumeInfo }) => {
     const image = volumeInfo.imageLinks?.thumbnail;
     const genre = volumeInfo.categories;
     const title = volumeInfo.title;
+    const toBuy = volumeInfo?.infoLink;
 
     const { favorites } = useSelector(selectFavorites);
 
@@ -97,22 +98,13 @@ export const Book = ({ id, clickAddFavorite, volumeInfo }) => {
                     <h3 onDoubleClick={activeEditMode} className="book__title">
                         <strong>Название:</strong> {title}
                     </h3>
-                    {genre && (
-                        <p className="book__category">
-                            <strong>Жанр:</strong> {genre}
-                        </p>
-                    )}
-                    {author && (
-                          <p className="book__author">
-                          <strong>Автор:</strong> {author}
-                      </p>
-                    )}
                      <div className="book__btn-group">
-                {navigate ? null : (
-                    <Link to={`book/${id}`}>
+                        {navigate ? (
+                            <a className="btn-group__buy-book" href={toBuy} target="_blank" rel="noreferrer">Купить</a>
+                        )  :  <Link to={`book/${id}`}>
                         <div className="btn-group__info">Подробнее</div>
-                    </Link>
-                )}
+                    </Link> }
+                   
             </div>
                 </div>
             )}

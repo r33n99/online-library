@@ -1,5 +1,9 @@
 .fullBook {
-    margin: 80px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     max-width: 1100px;
     padding: 20px;
 
@@ -54,8 +58,22 @@
         font-size: 30px;
 
         a {
-            color: rgb(27, 0, 134);
-            border-bottom: 2px solid rgb(27, 0, 134);
+            position: relative;
+            color: rgb(91, 13, 155);
+            &::after{
+                position: absolute;
+                content: "";
+                width: 0;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                right: 0;
+                background: rgb(91, 13, 155);
+                transition: all 1s;
+        }
+        &:hover:after {
+            width: 100%;
+          }
         }
         @media screen and (max-width: 768px) {
             font-size: 20px;
@@ -63,12 +81,12 @@
     }
 
     &__button {
-        font-size: 30px;
+        font-size: 25px;
         width: 120px;
         height: 35px;
         border-radius: 10px;
         background-color: rgb(255, 255, 255);
-        border: 1px solid #000;
+        border: .5px solid rgb(92, 91, 91);
         cursor: pointer;
         transition: all 0.3s ease-in-out;
 
@@ -78,7 +96,7 @@
         }
 
         &:hover {
-            background-color: #000;
+            background-color: rgb(69, 5, 5);
             color: #fff;
         }
     }

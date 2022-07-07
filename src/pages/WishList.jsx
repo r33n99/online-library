@@ -22,7 +22,7 @@ const WishList = () => {
                         ),
                     )
                 ) : (
-                    <div className="wish-list__no-content">Отсутствуют какие-либо книги в избранных 😦</div>
+                    <div className="wish-list__no-content">Отсутствуют книги в избранных 😦</div>
                 )}
             </div>
         </div>
